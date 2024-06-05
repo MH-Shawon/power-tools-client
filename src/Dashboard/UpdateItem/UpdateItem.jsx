@@ -23,18 +23,18 @@ const UpdateItem = () => {
       description: data.description,
       price: parseFloat(data.price),
       quantity: data.quantity,
-      
-  }
+
+    }
     const res = await axios.put(
-      `http://localhost:5000/products/${_id}`,
-      updateProduct,{
-        headers:{
-          authorization:`Bearer ${localStorage.getItem('token')}`
-        }
+      `https://power-tools-server-nine.vercel.app/products/${_id}`,
+      updateProduct, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token')}`
       }
-    
+    }
+
     );
-    
+
 
     if (res.data.modifiedCount > 0) {
       reset();
@@ -113,7 +113,7 @@ const UpdateItem = () => {
 
           <input
             type="file"
-            {...register("img", )}
+            {...register("img",)}
             className="block w-full p-3 text-base font-normal text-gray-700 transition ease-in-out bg-white border-gray-300 rounded cursor-pointer bg-clip-border focus:outline-none file:mr-4 file:py-2 file:px-3 file:rounded-full file:bg-blue-500 file:text-white"
           />
 

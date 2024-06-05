@@ -9,15 +9,15 @@ const AllUsers = () => {
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/users");
-      
+      const res = await axios.get("https://power-tools-server-nine.vercel.app/users");
+
       return res?.data;
     },
   });
 
   const handleMakeAdmin = (user) => {
-    axios.put(`http://localhost:5000/users/admin/${user._id}`).then((res) => {
-      
+    axios.put(`https://power-tools-server-nine.vercel.app/users/admin/${user._id}`).then((res) => {
+
 
       if (res.data.modifiedCount > 0) {
         refetch();
@@ -33,7 +33,7 @@ const AllUsers = () => {
   };
 
   const handleDelete = (user) => {
-    
+
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -44,7 +44,7 @@ const AllUsers = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:5000/users/${user._id}`).then((res) => {
+        axios.delete(`https://power-tools-server-nine.vercel.app/users/${user._id}`).then((res) => {
           refetch();
           if (res.deletedCount > 0) {
             Swal.fire({
@@ -60,7 +60,7 @@ const AllUsers = () => {
 
   return (
     <div className="bg-[#F6F6F6]">
-      
+
       <div className="bg-[#FFF] w-[800px] min-h-screen ml-[130px] static top-0">
         <h4 className="font-cinzel pl-8 pt-12 font-bold text-3xl text-[#151515]">
           TOTAL users:{users.length}

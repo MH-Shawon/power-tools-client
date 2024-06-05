@@ -9,7 +9,7 @@ const UserHome = () => {
     console.log(userInfo);
     useEffect(() => {
 
-        fetch(`http://localhost:5000/users/${user.email}`)
+        fetch(`https://power-tools-server-nine.vercel.app/users/${user.email}`)
             .then((res) => res.json())
             .then((data) => setUserInfo(data));
 
@@ -19,7 +19,7 @@ const UserHome = () => {
     if (!userInfo) {
         return <Loading />
     }
-    
+
     return (
         <div
             className="relative flex  max-w-[30rem] flex-col rounded-xl bg-transparent bg-clip-border text-gray-700 shadow-none mt-8 mx-auto">
@@ -45,7 +45,7 @@ const UserHome = () => {
                             <h4>Age:{userInfo.age}</h4>
                             <h4>Phone:{userInfo.phone}</h4>
                         </div>
-                        
+
                         <Link to={`/dashboard/edit-user/${userInfo._id}`}><button className="ml-5 btn btn-outline btn-secondary">Edit User</button></Link>
 
 
@@ -54,7 +54,7 @@ const UserHome = () => {
                 </div>
             </div>
 
-        </div>  
+        </div>
     );
 };
 

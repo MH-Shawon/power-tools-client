@@ -11,28 +11,28 @@ const SocialBtn = () => {
   const navigate = useNavigate()
   const handleGoogleSignUp = () => {
     googleLogin()
-      .then( (res) => {
-      const userInfo = {
-        email: res?.user?.email,
-        name: res?.user?.displayName,
-        photo: res?.user?.photoURL
+      .then((res) => {
+        const userInfo = {
+          email: res?.user?.email,
+          name: res?.user?.displayName,
+          photo: res?.user?.photoURL
 
-      };
-              
-       axios.post('http://localhost:5000/users', userInfo)
-       .then(res=>{
-        console.log(res.data);
-         if (res.data){
-           toast.success('User created successfully');
-           
-             navigate(location?.state?.from.pathname || "/")
-         }
-       })
-      
-     
-      
-      
-    });
+        };
+
+        axios.post('https://power-tools-server-nine.vercel.app/users', userInfo)
+          .then(res => {
+            console.log(res.data);
+            if (res.data) {
+              toast.success('User created successfully');
+
+              navigate(location?.state?.from.pathname || "/")
+            }
+          })
+
+
+
+
+      });
   };
   return (
     <div className="flex gap-8 mt-5">

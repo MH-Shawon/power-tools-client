@@ -13,7 +13,7 @@ const Review = () => {
   const [ratings, setRatings] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/rating")
+    fetch("https://power-tools-server-nine.vercel.app/rating")
       .then((res) => res.json())
       .then((data) => setRatings(data));
   }, []);
@@ -61,15 +61,15 @@ const Review = () => {
           <h2 className="text-3xl font-semibold capitalize">
             Our customer reviews
           </h2>
-                  <span className="block h-1 mx-auto mt-3 w-28 bg-[#FBC42D]"></span>
-                  <span className="block w-20 h-1 mx-auto mt-1 bg-[#A61719]"></span>
+          <span className="block h-1 mx-auto mt-3 w-28 bg-[#FBC42D]"></span>
+          <span className="block w-20 h-1 mx-auto mt-1 bg-[#A61719]"></span>
         </div>
         <div className="grid grid-cols-6">
           <div className="col-span-4 col-start-2">
             <Slider {...settings}>
               {ratings.map((rating) => (
                 <div key={rating._id}>
-                      <div className="px-10 py-10 text-center border-2 single-review border-[#FBC42D] rounded-tl-3xl rounded-br-3xl">
+                  <div className="px-10 py-10 text-center border-2 single-review border-[#FBC42D] rounded-tl-3xl rounded-br-3xl">
                     <img
                       className="mx-auto mb-5 rounded-full w-28"
                       src={rating.img}

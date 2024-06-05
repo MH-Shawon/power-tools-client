@@ -10,7 +10,7 @@ const img_hosting_api_key = import.meta.env.VITE_IMAGE_HOSTING_API_KEY;
 const img_hosting_api_link = `https://api.imgbb.com/1/upload?key=${img_hosting_api_key}`;
 
 const AddItem = () => {
-  
+
   const {
     register,
     handleSubmit,
@@ -19,7 +19,7 @@ const AddItem = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    
+
     const imageFile = { image: data.img[0] };
     const res = await axios.post(img_hosting_api_link, imageFile, {
       headers: {
@@ -30,13 +30,13 @@ const AddItem = () => {
       const menuItem = {
         name: data.name,
         model: data.model,
-    
+
         description: data.description,
         price: parseFloat(data.price),
         quantity: data.quantity,
         img: res.data.data.display_url,
       };
-      const menuRes = await axios.post("http://localhost:5000/products", menuItem, {
+      const menuRes = await axios.post("https://power-tools-server-nine.vercel.app/products", menuItem, {
         headers: {
           authorization: `Bearer ${localStorage.getItem('token')}`
         }
@@ -51,8 +51,8 @@ const AddItem = () => {
   };
   return (
     <div className="mb-12">
-      
-<h4 className="my-5 text-3xl font-bold text-center underline">Add Product</h4>
+
+      <h4 className="my-5 text-3xl font-bold text-center underline">Add Product</h4>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-[740px] mx-auto  "
@@ -69,7 +69,7 @@ const AddItem = () => {
               {errors.recipeName && (
                 <span className="error">Product Name is required</span>
               )}
-          </div>
+            </div>
             <div className="w-1/2">
               <h2>Product model*</h2>
               <input
@@ -80,9 +80,9 @@ const AddItem = () => {
               {errors.recipeName && (
                 <span className="error">Recipe Name is required</span>
               )}
+            </div>
           </div>
-        </div>
-          
+
 
           <div className="flex w-full gap-6">
             <div className="w-1/2">

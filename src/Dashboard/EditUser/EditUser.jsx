@@ -2,32 +2,32 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useLoaderData } from "react-router-dom";
 
-const EditUser=()=>{
+const EditUser = () => {
     const user = useLoaderData();
-    const handleEditUser=(e)=>{
+    const handleEditUser = (e) => {
         e.preventDefault();
         const form = e.target;
         const name = form.username.value
         const age = form.age.value
         const phone = form.phone.value
 
-        const userInfo ={
+        const userInfo = {
             name, email: user?.email, age, phone
         }
-        axios.put(`http://localhost:5000/users/${user.email}`, userInfo)
-        .then(res=>{
-            if(res.data.modifiedCount>0){
-                toast.success(`${name}'s profile successfully updated`)
-            }
-            form.reset('')
-        })
+        axios.put(`https://power-tools-server-nine.vercel.app/users/${user.email}`, userInfo)
+            .then(res => {
+                if (res.data.modifiedCount > 0) {
+                    toast.success(`${name}'s profile successfully updated`)
+                }
+                form.reset('')
+            })
     }
-    
-    
-    return(
+
+
+    return (
         <div className="max-w-md p-6 mx-auto bg-white rounded-lg shadow-md">
             <h2 className="mb-6 text-2xl font-bold">User Information Form</h2>
-            <form onSubmit={handleEditUser}  className="space-y-4">
+            <form onSubmit={handleEditUser} className="space-y-4">
                 <div>
                     <label htmlFor="username" className="block text-sm font-medium text-gray-700">
                         Username
@@ -64,7 +64,7 @@ const EditUser=()=>{
                         type="number"
                         name="age"
                         id="age"
-                        
+
                         className="w-full p-2 mt-1 border border-gray-300 rounded-md"
                         required
                     />
@@ -78,7 +78,7 @@ const EditUser=()=>{
                         type="tel"
                         name="phone"
                         id="phone"
-                        
+
                         className="w-full p-2 mt-1 border border-gray-300 rounded-md"
                         required
                     />
@@ -91,5 +91,6 @@ const EditUser=()=>{
                 </div>
             </form>
         </div>
-    )}
+    )
+}
 export default EditUser;

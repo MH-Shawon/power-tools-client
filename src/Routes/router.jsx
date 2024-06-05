@@ -33,12 +33,12 @@ const router = createBrowserRouter([
       {
         path: "/products",
         element: <AllProducts />,
-        loader: () => fetch("http://localhost:5000/products"),
+        loader: () => fetch("https://power-tools-server-nine.vercel.app/products"),
       },
       {
         path: "/productDetails/:id",
         element: <ProductDetails />,
-        loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`),
+        loader: ({ params }) => fetch(`https://power-tools-server-nine.vercel.app/products/${params.id}`),
       },
       {
         path: "/about",
@@ -54,42 +54,42 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
-    children:[
+    children: [
       {
-        path:'/dashboard/addItems',
+        path: '/dashboard/addItems',
         element: <AdminRoute><AddItem /></AdminRoute>
       },
       {
-        path:'/dashboard/manageProducts',
-        element:<AdminRoute>
+        path: '/dashboard/manageProducts',
+        element: <AdminRoute>
           <ManageProducts />
         </AdminRoute>
       },
       {
-        path:'/dashboard/users',
+        path: '/dashboard/users',
         element: <AdminRoute><AllUsers /></AdminRoute>
       },
       {
-        path:'/dashboard/updateItem/:id',
+        path: '/dashboard/updateItem/:id',
         element: <AdminRoute><UpdateItem /></AdminRoute>,
-        loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`)
+        loader: ({ params }) => fetch(`https://power-tools-server-nine.vercel.app/products/${params.id}`)
       },
       {
         path: '/dashboard/admin-home',
-      
-          element: <AdminRoute > <AdminHome></AdminHome></AdminRoute>
+
+        element: <AdminRoute > <AdminHome></AdminHome></AdminRoute>
       },
 
       {
-        path:'/dashboard/user-home',
-        element:<UserHome />
+        path: '/dashboard/user-home',
+        element: <UserHome />
       },
       {
         path: "/dashboard/edit-user/:id",
         element: <EditUser />,
-        loader: ({ params }) => fetch(`http://localhost:5000/user/${params.id}`)
+        loader: ({ params }) => fetch(`https://power-tools-server-nine.vercel.app/user/${params.id}`)
       }
-      
+
     ]
   },
   {

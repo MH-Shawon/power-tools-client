@@ -9,7 +9,7 @@ import { FiEdit } from "react-icons/fi";
 
 const ManageProducts = () => {
   const [menu, loading, refetch] = useMenu();
-  
+
 
   const handleDelete = (item) => {
     Swal.fire({
@@ -23,16 +23,16 @@ const ManageProducts = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await axios.delete(
-          `http://localhost:5000/products/${item._id}`, {
+          `https://power-tools-server-nine.vercel.app/products/${item._id}`, {
           headers: {
             authorization: `Bearer ${localStorage.getItem('token')}`
           }
         }
         );
- if (res.data.deletedCount > 0) {
-            refetch()
+        if (res.data.deletedCount > 0) {
+          refetch()
           toast.success(`${item.name} is successfully deleted from DB`);
-          
+
 
         }
       }
@@ -40,7 +40,7 @@ const ManageProducts = () => {
   };
   return (
     <div className="bg-[#F6F6F6]">
-      
+
       <div className="bg-[#FFF] w-[800px] min-h-screen ml-[130px] static top-0">
         <div className="font-cinzel pl-8 pt-12 font-bold text-3xl text-[#151515]">
           <h4>TOTAL MENU:{menu.length}</h4>
@@ -71,13 +71,13 @@ const ManageProducts = () => {
                   <td>{item.name}</td>
                   <td>${item.price}</td>
                   <td>
-<Link to={`/dashboard/updateItem/${item._id}`}>
-                              <button className="bg-[#D1A054] text-white text-xl px-3 py-1 rounded w-[40px] h-[40px]">
-                                  <FiEdit />
-                              </button>
-</Link>
+                    <Link to={`/dashboard/updateItem/${item._id}`}>
+                      <button className="bg-[#D1A054] text-white text-xl px-3 py-1 rounded w-[40px] h-[40px]">
+                        <FiEdit />
+                      </button>
+                    </Link>
 
-                    
+
                   </td>
                   <td className="text-center">
                     <button
