@@ -26,7 +26,7 @@ const UpdateItem = () => {
 
     }
     const res = await axios.put(
-      `https://power-tools-server-nine.vercel.app/products/${_id}`,
+      `http://localhost:5000/products/${_id}`,
       updateProduct, {
       headers: {
         authorization: `Bearer ${localStorage.getItem('token')}`

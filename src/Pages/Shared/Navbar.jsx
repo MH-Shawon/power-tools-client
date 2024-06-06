@@ -1,23 +1,48 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
-import useAdmin from "../../Hooks/useAdmin";
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, logOut } = useAuth();
-  
-  
+  const [searchTerm, setSearchTerm] = useState('');
+  const [products, setProducts] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/products')
+      .then(response => response.json())
+      .then(data => setProducts(data))
+      .catch(error => console.error('Error fetching products:', error));
+  }, []);
 
   const handleSignOut = () => {
     logOut()
-      .then((result) => {
-          localStorage.removeItem("token");
-        //   console.log(result.user);
+      .then(() => {
+        localStorage.removeItem("token");
       })
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const handleSearch = (event) => {
+    const value = event.target.value;
+    setSearchTerm(value);
+    if (value) {
+      const results = products.filter(product =>
+        product.model.toLowerCase().includes(value.toLowerCase())
+      );
+      setSearchResults(results);
+    } else {
+      setSearchResults([]);
+    }
+  };
+
+  const handleResultClick = () => {
+    setSearchTerm('');
+    setSearchResults([]);
   };
 
   const menuItems = (
@@ -29,13 +54,13 @@ const Navbar = () => {
         <Link to="/products">Product</Link>
       </li>
       <li>
-        <Link to="/portfolio">Portfolio</Link>
-      </li>
-      <li>
         <Link to="/blog">Blog</Link>
       </li>
       <li>
         <Link to="/about">About</Link>
+      </li>
+      <li>
+        <a href="https://mohsin-hossain-portfolio.vercel.app/" target="_blank" rel="noopener noreferrer">Portfolio</a>
       </li>
       {user && (
         <li>
@@ -44,6 +69,7 @@ const Navbar = () => {
       )}
     </>
   );
+
   return (
     <div className="fixed z-10 px-12 font-extrabold navbar bg-[#F2BB29]">
       <div className="navbar-start">
@@ -82,7 +108,27 @@ const Navbar = () => {
       <div className="hidden navbar-center lg:flex">
         <ul className="px-1 text-base menu menu-horizontal">{menuItems}</ul>
       </div>
-      <div className="navbar-end">
+      <div className="relative navbar-end">
+        <div className="relative">
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={handleSearch}
+            placeholder="Search by model"
+            className="mr-16 input input-bordered input-sm"
+          />
+          {searchResults.length > 0 && (
+            <ul className="absolute left-0 mt-1 z-[1] p-2 shadow bg-base-100 rounded-box w-[210px]">
+              {searchResults.map(product => (
+                <li key={product.model}>
+                  <Link to={`/productDetails/${product._id}`} onClick={handleResultClick}>
+                    {product.model}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
         {user?.email ? (
           <div className="dropdown dropdown-end">
             <div

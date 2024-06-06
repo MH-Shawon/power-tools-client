@@ -26,7 +26,7 @@ const SignUp = () => {
         email: createdUser.email,
         name: createdUser.displayName || data.name,
       };
-      axios.post("https://power-tools-server-nine.vercel.app/users", userInfo).then((res) => {
+      axios.post("http://localhost:5000/users", userInfo).then((res) => {
         // localStorage.setItem("token", res.data.token);
         if (res.data.insertedId) {
           toast.success("User created successfully");

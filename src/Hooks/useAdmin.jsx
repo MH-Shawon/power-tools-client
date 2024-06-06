@@ -9,7 +9,7 @@ const useAdmin = () => {
     enabled: !loading,
     queryFn: async () => {
       if (!user?.email) return false; // Return false if no user email is present
-      const res = await axios.get(`https://power-tools-server-nine.vercel.app/users/admin/${user?.email}`);
+      const res = await axios.get(`http://localhost:5000/users/admin/${user?.email}`);
       console.log(res.data);
       return res?.data?.admin;
     },
