@@ -36,7 +36,7 @@ const AddItem = () => {
         quantity: data.quantity,
         img: res.data.data.display_url,
       };
-      const menuRes = await axios.post("http://localhost:5000/products", menuItem, {
+      const menuRes = await axios.post("https://power-tools-server-nine.vercel.app/products", menuItem, {
         headers: {
           authorization: `Bearer ${localStorage.getItem('token')}`
         }

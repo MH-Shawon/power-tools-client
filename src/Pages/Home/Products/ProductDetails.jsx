@@ -20,7 +20,7 @@ const ProductDetails = () => {
       return alert("Quantity must be 15 or bigger than 15");
     }
     data.quantity = product.quantity - data.quantity;
-    fetch(`http://localhost:5000/product/${id}`, {
+    fetch(`https://power-tools-server-nine.vercel.app/product/${id}`, {
       method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(data),
@@ -76,10 +76,10 @@ const ProductDetails = () => {
                 <br />
                 {/* errors will return when field validation fails  */}
                 {errors.name ||
-                errors.email ||
-                errors.address ||
-                errors.city ||
-                errors.phone ? (
+                  errors.email ||
+                  errors.address ||
+                  errors.city ||
+                  errors.phone ? (
                   <span className="pl-5 mb-3 font-semibold text-red-500">
                     Please fill all the input correctly!
                   </span>
