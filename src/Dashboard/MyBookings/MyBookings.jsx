@@ -8,47 +8,47 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 
 const MyBookings = () => {
-//   const [orders, setorders] = useState([]);
-//   const [isDelete, setIsDelete] = useState(null);
-//   const { user } = useAuth();
+  //   const [orders, setorders] = useState([]);
+  //   const [isDelete, setIsDelete] = useState(null);
+  //   const { user } = useAuth();
 
-//   useEffect(() => {
-//     fetch(`http://localhost:5000/orders?email=${user.email}`)
-//       .then((res) => res.json())
-//       .then((data) => setorders(data));
-//   }, [user.email]);
-const [orders, refetch] = useOrder()
+  //   useEffect(() => {
+  //     fetch(`https://power-tools-server-nine.vercel.app/orders?email=${user.email}`)
+  //       .then((res) => res.json())
+  //       .then((data) => setorders(data));
+  //   }, [user.email]);
+  const [orders, refetch] = useOrder()
 
-    const handleDeleteOrder = (order) => {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!",
-        }).then(async (result) => {
-            if (result.isConfirmed) {
-                const res = await axios.delete(
-                    `http://localhost:5000/delete-order/${order._id}`, {
-                    headers: {
-                        authorization: `Bearer ${localStorage.getItem('token')}`
-                    }
-                }
-                );
-                if (res.data.deletedCount > 0) {
-                    refetch()
-                    toast.success(`${order.name} is successfully deleted from DB`);
+  const handleDeleteOrder = (order) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await axios.delete(
+          `https://power-tools-server-nine.vercel.app/delete-order/${order._id}`, {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+        }
+        );
+        if (res.data.deletedCount > 0) {
+          refetch()
+          toast.success(`${order.name} is successfully deleted from DB`);
 
 
-                }
-            }
-        });
-    };
+        }
+      }
+    });
+  };
   return (
     <div className="container w-[1050px] py-10 mx-auto text-center">
-    <h5 className="mb-2 text-2xl font-black text-start">Total Orders:{orders.length}</h5>
+      <h5 className="mb-2 text-2xl font-black text-start">Total Orders:{orders.length}</h5>
       <div className="flex flex-col">
         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
@@ -58,19 +58,19 @@ const [orders, refetch] = useOrder()
                   <tr>
                     <th
                       scope="col"
-                                          className="py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase "
+                      className="py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase "
                     >
                       order Name
                     </th>
                     <th
                       scope="col"
-                                          className="py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase "
+                      className="py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase "
                     >
                       Order Id
                     </th>
                     <th
                       scope="col"
-                                          className="py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase "
+                      className="py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase "
                     >
                       Quantity
                     </th>
@@ -127,9 +127,9 @@ const [orders, refetch] = useOrder()
                       <td>
                         <button
                           onClick={() => handleDeleteOrder(order)}
-                                  className="text-2xl font-black text-center hover:text-red-400"
+                          className="text-2xl font-black text-center hover:text-red-400"
                         >
-                                  <MdDeleteOutline />
+                          <MdDeleteOutline />
                         </button>
                       </td>
                     </tr>

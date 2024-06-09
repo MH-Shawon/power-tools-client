@@ -6,8 +6,8 @@ import useAuth from "../../Hooks/useAuth";
 
 
 const CheckOutForm = ({ payment }) => {
-    
-    const { name,price, _id } = payment;
+
+    const { name, price, _id } = payment;
     const stripe = useStripe();
     const elements = useElements();
     const [error, setError] = useState("");
@@ -18,7 +18,7 @@ const CheckOutForm = ({ payment }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://power-tools-server-nine.vercel.app/create-payment-intent", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ price }),
@@ -78,7 +78,7 @@ const CheckOutForm = ({ payment }) => {
                 last4: paymentMethod.card.last4,
                 transactionId: paymentIntent.id,
             };
-            const url = `http://localhost:5000/payment/${_id}`;
+            const url = `https://power-tools-server-nine.vercel.app/payment/${_id}`;
             fetch(url, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -103,7 +103,7 @@ const CheckOutForm = ({ payment }) => {
                     <p className=""><strong>Product:</strong> {name}</p>
                     <p className=""><strong>Amount:</strong> ${price}</p>
                     <p className=""><strong>Order ID:</strong> {_id}</p>
-                    
+
                 </div>
                 <div className="mt-6 md:w-1/2 md:mt-0">
                     <form onSubmit={handleSubmit} className="p-6 bg-white rounded-lg shadow-md">

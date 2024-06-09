@@ -8,9 +8,10 @@ const useAdmin = () => {
   const [admin, setAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    fetch(`http://localhost:5000/users/${user?.email}`)
+    fetch(`https://power-tools-server-nine.vercel.app/users/${user?.email}`)
       .then((res) => res.json())
-      .then((data) => {setAdmin(data.role)
+      .then((data) => {
+        setAdmin(data.role)
         setLoading(false)
       });
   }, [user?.email]);

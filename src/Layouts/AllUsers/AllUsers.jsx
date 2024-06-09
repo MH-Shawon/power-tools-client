@@ -9,14 +9,14 @@ const AllUsers = () => {
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/users");
+      const res = await axios.get("https://power-tools-server-nine.vercel.app/users");
 
       return res?.data;
     },
   });
 
   const handleMakeAdmin = (user) => {
-    axios.put(`http://localhost:5000/users/admin/${user._id}`).then((res) => {
+    axios.put(`https://power-tools-server-nine.vercel.app/users/admin/${user._id}`).then((res) => {
 
 
       if (res.data.modifiedCount > 0) {
@@ -44,7 +44,7 @@ const AllUsers = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:5000/users/${user._id}`).then((res) => {
+        axios.delete(`https://power-tools-server-nine.vercel.app/users/${user._id}`).then((res) => {
           refetch();
           if (res.deletedCount > 0) {
             Swal.fire({

@@ -12,7 +12,7 @@ const Navbar = () => {
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/products")
+    fetch("https://power-tools-server-nine.vercel.app/products")
       .then((response) => response.json())
       .then((data) => setProducts(data))
       .catch((error) => console.error("Error fetching products:", error));
@@ -74,7 +74,7 @@ const Navbar = () => {
           <Link to="/dashboard/user-home">Dashboard</Link>
         </li>
       )}
-      { admin && (
+      {admin && (
         <li>
           <Link to="/dashboard/admin-home">Dashboard</Link>
         </li>
