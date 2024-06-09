@@ -6,7 +6,8 @@ import useAuth from "../../Hooks/useAuth";
 
 
 const CheckOutForm = ({ payment }) => {
-    const { price, _id } = payment;
+    
+    const { name,price, _id } = payment;
     const stripe = useStripe();
     const elements = useElements();
     const [error, setError] = useState("");
@@ -19,7 +20,7 @@ const CheckOutForm = ({ payment }) => {
     useEffect(() => {
         fetch("http://localhost:5000/create-payment-intent", {
             method: "POST",
-            headers: { "content-type": "application/json" },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ price }),
         })
             .then((res) => res.json())
@@ -43,6 +44,8 @@ const CheckOutForm = ({ payment }) => {
         if (error) {
             setError(error.message);
             setSuccess("");
+            setProcessing(false);
+            return;
         } else {
             setError("");
             console.log(paymentMethod);
@@ -61,22 +64,24 @@ const CheckOutForm = ({ payment }) => {
         if (intentError) {
             setError(intentError.message);
             setSuccess("");
+            setProcessing(false);
+            return;
         } else {
             setError("");
-            setSuccess("Your payment processed succesfully");
+            setSuccess("Your payment was processed successfully");
             setProcessing(false);
             // save to database
             const paymentInfo = {
-                paymentStatus: "Successfull",
+                paymentStatus: "Successful",
                 amount: paymentIntent.amount,
                 created: paymentIntent.created,
                 last4: paymentMethod.card.last4,
-                transactionId: paymentIntent.client_secret.slice("_secret")[0],
+                transactionId: paymentIntent.id,
             };
             const url = `http://localhost:5000/payment/${_id}`;
             fetch(url, {
                 method: "POST",
-                headers: { "content-type": "application/json" },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(paymentInfo),
             })
                 .then((res) => res.json())
@@ -84,46 +89,60 @@ const CheckOutForm = ({ payment }) => {
                     if (data.modifiedCount) {
                         navigate("/order-success");
                     } else {
-                        window.reload();
+                        window.location.reload();
                     }
                 });
         }
     };
+
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <CardElement
-                    options={{
-                        style: {
-                            base: {
-                                fontSize: "16px",
-                                color: "#424770",
-                                "::placeholder": {
-                                    color: "#aab7c4",
-                                },
-                            },
-                            invalid: {
-                                color: "#9e2146",
-                            },
-                        },
-                    }}
-                />
-                {processing ? (
-                    <p>Processing..</p>
-                ) : (
-                    <button
-                        className="px-10 py-1 mt-5 text-white bg-red-400 rounded-lg"
-                        type="submit"
-                        disabled={!stripe || success}
-                    >
-                        Pay
-                    </button>
-                )}
-            </form>
-            {error && <p className="mt-2 text-red-500">{error}</p>}
-            {success && <p className="mt-2 text-green-500">{success}</p>}
+        <div className="">
+            <div className="flex flex-col items-center justify-center max-w-4xl p-6 bg-gray-100 rounded-lg shadow-md md:flex-row md:items-start md:space-x-8">
+                <div className=" md:w-1/2">
+                    <h2 className="mb-1 text-2xl font-semibold">Payment Details</h2>
+                    <p className=""><strong>Product:</strong> {name}</p>
+                    <p className=""><strong>Amount:</strong> ${price}</p>
+                    <p className=""><strong>Order ID:</strong> {_id}</p>
+                    
+                </div>
+                <div className="mt-6 md:w-1/2 md:mt-0">
+                    <form onSubmit={handleSubmit} className="p-6 bg-white rounded-lg shadow-md">
+                        <div className="mb-4">
+                            <CardElement
+                                options={{
+                                    style: {
+                                        base: {
+                                            fontSize: "16px",
+                                            color: "#424770",
+                                            "::placeholder": {
+                                                color: "#aab7c4",
+                                            },
+                                        },
+                                        invalid: {
+                                            color: "#9e2146",
+                                        },
+                                    },
+                                }}
+                                className="p-3 border border-gray-300 rounded-lg"
+                            />
+                        </div>
+                        {processing ? (
+                            <p className="text-gray-500">Processing...</p>
+                        ) : (
+                            <button
+                                className="w-full px-4 py-2 text-white transition-colors duration-300 bg-blue-600 rounded-lg hover:bg-blue-700"
+                                type="submit"
+                                disabled={!stripe || success}
+                            >
+                                Pay ${price}
+                            </button>
+                        )}
+                    </form>
+                    {error && <p className="mt-4 text-red-500">{error}</p>}
+                    {success && <p className="mt-4 text-green-500">{success}</p>}
+                </div>
+            </div>
         </div>
     );
 };
-
 export default CheckOutForm;

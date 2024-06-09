@@ -17,26 +17,22 @@ const Payment = () => {
       .then((res) => res.json())
       .then((data) => setPayment(data));
   }, [id]);
+
   return (
-    <div>
-      <div className="container py-10 mx-auto">
-        <div className="grid grid-cols-2 gap0">
-          <div className="payment-box">
-            <h2 className="my-5 text-4xl font-semibold capitalize">
+    <div className="flex items-center justify-center ">
+      <div className="container px-4 py-5 pt-20 mx-auto">
+        <div className="flex justify-center">
+          <div className="w-full p-8 bg-white rounded-lg shadow-md lg:w-2/3">
+            <h2 className="mb-5 text-4xl font-semibold text-center capitalize">
               Confirm your payment
             </h2>
-            <p>Product Id: {id}</p>
-            <p>
-              Product is <span className="font-semibold">{payment.name}</span>
-            </p>
-            <h3 className="mb-5 text-2xl font-semibold">
-              Price ${payment.price}
-            </h3>
-            {payment?.price && (
-              <Elements stripe={stripePromise}>
-                <CheckOutForm payment={payment} />
-              </Elements>
-            )}
+            <div>
+              {payment?.price && (
+                <Elements stripe={stripePromise}>
+                  <CheckOutForm payment={payment} />
+                </Elements>
+              )}
+            </div>
           </div>
         </div>
       </div>
