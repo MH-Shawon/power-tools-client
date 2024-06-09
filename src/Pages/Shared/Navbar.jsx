@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
-
+import useAdmin from "../../Hooks/useAdmin";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, logOut } = useAuth();
-  const [searchTerm, setSearchTerm] = useState('');
+  const [admin] = useAdmin();
+  const [searchTerm, setSearchTerm] = useState("");
   const [products, setProducts] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    fetch('https://power-tools-server-nine.vercel.app/products')
-      .then(response => response.json())
-      .then(data => setProducts(data))
-      .catch(error => console.error('Error fetching products:', error));
+    fetch("http://localhost:5000/products")
+      .then((response) => response.json())
+      .then((data) => setProducts(data))
+      .catch((error) => console.error("Error fetching products:", error));
   }, []);
 
   const handleSignOut = () => {
@@ -31,7 +32,7 @@ const Navbar = () => {
     const value = event.target.value;
     setSearchTerm(value);
     if (value) {
-      const results = products.filter(product =>
+      const results = products.filter((product) =>
         product.model.toLowerCase().includes(value.toLowerCase())
       );
       setSearchResults(results);
@@ -41,7 +42,7 @@ const Navbar = () => {
   };
 
   const handleResultClick = () => {
-    setSearchTerm('');
+    setSearchTerm("");
     setSearchResults([]);
   };
 
@@ -60,11 +61,22 @@ const Navbar = () => {
         <Link to="/about">About</Link>
       </li>
       <li>
-        <a href="https://mohsin-hossain-portfolio.vercel.app/" target="_blank" rel="noopener noreferrer">Portfolio</a>
+        <a
+          href="https://mohsin-hossain-portfolio.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Portfolio
+        </a>
       </li>
-      {user && (
+      {user && !admin && (
         <li>
-          <Link to="/dashboard">Dashboard</Link>
+          <Link to="/dashboard/user-home">Dashboard</Link>
+        </li>
+      )}
+      { admin && (
+        <li>
+          <Link to="/dashboard/admin-home">Dashboard</Link>
         </li>
       )}
     </>
@@ -119,9 +131,12 @@ const Navbar = () => {
           />
           {searchResults.length > 0 && (
             <ul className="absolute left-0 mt-1 z-[1] p-2 shadow bg-base-100 rounded-box w-[210px]">
-              {searchResults.map(product => (
+              {searchResults.map((product) => (
                 <li key={product.model}>
-                  <Link to={`/productDetails/${product._id}`} onClick={handleResultClick}>
+                  <Link
+                    to={`/productDetails/${product._id}`}
+                    onClick={handleResultClick}
+                  >
                     {product.model}
                   </Link>
                 </li>

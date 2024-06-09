@@ -9,7 +9,7 @@ const UserHome = () => {
     console.log(userInfo);
     useEffect(() => {
 
-        fetch(`https://power-tools-server-nine.vercel.app/users/${user.email}`)
+        fetch(`http://localhost:5000/users/${user.email}`)
             .then((res) => res.json())
             .then((data) => setUserInfo(data));
 

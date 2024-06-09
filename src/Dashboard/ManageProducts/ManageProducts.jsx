@@ -23,7 +23,7 @@ const ManageProducts = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await axios.delete(
-          `https://power-tools-server-nine.vercel.app/products/${item._id}`, {
+          `http://localhost:5000/products/${item._id}`, {
           headers: {
             authorization: `Bearer ${localStorage.getItem('token')}`
           }

@@ -19,6 +19,11 @@ import UserHome from "../Dashboard/UserHome/UserHome";
 import ProductDetails from "../Pages/Home/Products/ProductDetails";
 import AdminRoute from "./AdminRoute";
 import EditUser from "../Dashboard/EditUser/EditUser";
+import CheckOut from "../Dashboard/Payment/CheckOut/CheckOut";
+import Payment from "../Dashboard/Payment/Payment";
+import OrderSuccess from "../Dashboard/Payment/OrderSuccess/OrderSuccess";
+import MyBookings from "../Dashboard/MyBookings/MyBookings";
+import AddReview from "../Dashboard/AddReview/AddReview";
 
 const router = createBrowserRouter([
   {
@@ -33,12 +38,41 @@ const router = createBrowserRouter([
       {
         path: "/products",
         element: <AllProducts />,
-        loader: () => fetch("https://power-tools-server-nine.vercel.app/products"),
+        loader: () => fetch("http://localhost:5000/products"),
       },
       {
         path: "/productDetails/:id",
-        element: <ProductDetails />,
-        loader: ({ params }) => fetch(`https://power-tools-server-nine.vercel.app/products/${params.id}`),
+        element: (
+          <PrivateRoute>
+            <ProductDetails />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/products/${params.id}`),
+      },
+      {
+        path: "/checkOut/:id",
+        element: (
+          <PrivateRoute>
+            <CheckOut />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/payment/:id",
+        element: (
+          <PrivateRoute>
+            <Payment />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/order-success",
+        element: (
+          <PrivateRoute>
+            <OrderSuccess />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/about",
@@ -53,44 +87,85 @@ const router = createBrowserRouter([
 
   {
     path: "/dashboard",
-    element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
     children: [
       {
-        path: '/dashboard/addItems',
-        element: <AdminRoute><AddItem /></AdminRoute>
+        path: "/dashboard/addItems",
+        element: (
+          <AdminRoute>
+            <AddItem />
+          </AdminRoute>
+        ),
       },
       {
-        path: '/dashboard/manageProducts',
-        element: <AdminRoute>
-          <ManageProducts />
-        </AdminRoute>
+        path: "/dashboard/manageProducts",
+        element: (
+          <AdminRoute>
+            <ManageProducts />
+          </AdminRoute>
+        ),
       },
       {
-        path: '/dashboard/users',
-        element: <AdminRoute><AllUsers /></AdminRoute>
+        path: "/dashboard/users",
+        element: (
+          <AdminRoute>
+            <AllUsers />
+          </AdminRoute>
+        ),
       },
       {
-        path: '/dashboard/updateItem/:id',
-        element: <AdminRoute><UpdateItem /></AdminRoute>,
-        loader: ({ params }) => fetch(`https://power-tools-server-nine.vercel.app/products/${params.id}`)
+        path: "/dashboard/updateItem/:id",
+        element: (
+          <AdminRoute>
+            <UpdateItem />
+          </AdminRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/products/${params.id}`),
       },
       {
-        path: '/dashboard/admin-home',
+        path: "/dashboard/admin-home",
 
-        element: <AdminRoute > <AdminHome></AdminHome></AdminRoute>
+        element: (
+          <AdminRoute>
+            <AdminHome></AdminHome>
+          </AdminRoute>
+        ),
       },
 
+      // user route
+
       {
-        path: '/dashboard/user-home',
-        element: <UserHome />
+        path: "/dashboard/user-home",
+        element: <UserHome />,
       },
       {
         path: "/dashboard/edit-user/:id",
         element: <EditUser />,
-        loader: ({ params }) => fetch(`https://power-tools-server-nine.vercel.app/user/${params.id}`)
-      }
-
-    ]
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/user/${params.id}`),
+      },
+      {
+        path: "/dashboard/my-booking",
+        element: (
+          <PrivateRoute>
+            <MyBookings />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/review",
+        element: (
+          <PrivateRoute>
+            <AddReview />
+          </PrivateRoute>
+        ),
+      },
+    ],
   },
   {
     path: "/login",

@@ -1,12 +1,12 @@
+import axios from "axios";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLoaderData, useNavigate } from "react-router-dom";
 
 const ProductDetails = () => {
   const product = useLoaderData();
-
   const navigate = useNavigate();
 
-  // const history = useHistory()
   const {
     register,
     handleSubmit,
@@ -14,25 +14,37 @@ const ProductDetails = () => {
     formState: { errors },
   } = useForm();
 
+  const [showFullDescription, setShowFullDescription] = useState(false);
+
   const onSubmit = (data) => {
     localStorage.setItem("quantity", data.quantity);
     if (data.quantity < 15) {
       return alert("Quantity must be 15 or bigger than 15");
     }
     data.quantity = product.quantity - data.quantity;
-    fetch(`https://power-tools-server-nine.vercel.app/product/${id}`, {
-      method: "PUT",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log()
-        if (data.modifiedCount) {
-          // navigate(`/checkOut/${product._id}`);
-          reset();
-        }
-      });
+    axios.put(`http://localhost:5000/product/${product._id}`).then((data) => {
+      
+      if (data.data.acknowledged) {
+        navigate(`/checkOut/${product._id}`);
+        reset();
+      }
+    });
+  };
+
+  const toggleDescription = () => {
+    setShowFullDescription(!showFullDescription);
+  };
+
+  const renderDescription = () => {
+    const wordLimit = 50;
+    const words = product.description.split(" ");
+    if (words.length <= wordLimit) {
+      return product.description;
+    }
+    if (showFullDescription) {
+      return product.description;
+    }
+    return words.slice(0, wordLimit).join(" ") + "...";
   };
 
   return (
@@ -55,12 +67,22 @@ const ProductDetails = () => {
             <p className="text-xl font-semibold">
               Price <span className="text-gray-600">${product.price}</span>
             </p>
-            <p className="font-medium ">
+            <p className="font-medium">
               Product Details{" "}
-              <span className="text-gray-600">{product.description}</span>
+              <span className="text-gray-600">{renderDescription()} </span>
+              {product.description.split(" ").length > 50 && (
+                <button onClick={toggleDescription} className="text-blue-500">
+                  {showFullDescription ? "" : "See More"}
+                </button>
+              )}
+              {showFullDescription && (
+                <div className="mt-4 full-details">
+                  <p>{product.body}</p>
+                </div>
+              )}
             </p>
-            <p className="description">{product.body}</p>
-            <div className="puchase-info-form">
+
+            <div className="purchase-info-form">
               <h2 className="mt-3 mb-3 text-2xl text-center capitalize lg:mt-0">
                 Enter Quantity to Continue
               </h2>
@@ -74,20 +96,14 @@ const ProductDetails = () => {
                   placeholder={`Enter Min 15 Tools Or max ${product.quantity}`}
                 />{" "}
                 <br />
-                {/* errors will return when field validation fails  */}
-                {errors.name ||
-                  errors.email ||
-                  errors.address ||
-                  errors.city ||
-                  errors.phone ? (
+                {/* errors will return when field validation fails */}
+                {errors.quantity && (
                   <span className="pl-5 mb-3 font-semibold text-red-500">
-                    Please fill all the input correctly!
+                    Please enter a valid quantity!
                   </span>
-                ) : (
-                  ""
                 )}
                 <input
-                  className="block py-2 mx-auto mt-3 text-lg bg-white border-2 rounded-full cursor-pointer border-secondary px-14"
+                  className="block py-2 mx-auto mt-3 text-lg font-bold bg-white border-2 rounded-full cursor-pointer border-[#F2BB29] px-14"
                   type="submit"
                   value="Purchase"
                 />
