@@ -45,7 +45,7 @@ const Footer = () => {
             <footer className="flex justify-between px-10 py-4 border-t footer bg-base-200 text-base-content border-base-300">
                 <div className="items-center grid-flow-col">
                     <img style={{ width: 150 }} src="https://i.ibb.co/HzpCshd/dewalt.png" alt="Logo" />
-                    <p>ACME Industries Ltd. <br />Providing reliable tech since 1992</p>
+                    <p>deWalt Industries Ltd. <br />Providing reliable tech since 1992</p>
                 </div>
                 <div className="flex items-center justify-center text-2xl">
                     <FaFacebookF className='m-1' />
