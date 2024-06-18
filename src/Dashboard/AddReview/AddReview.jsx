@@ -14,7 +14,7 @@ const AddReview = () => {
   const [successRating, setSuccessRating] = useState(false);
 
   const onSubmit = (data) => {
-    fetch("https://power-tools-server-nine.vercel.app/rating", {
+    fetch("http://localhost:5000/rating", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(data),

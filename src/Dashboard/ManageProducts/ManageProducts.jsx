@@ -23,7 +23,7 @@ const ManageProducts = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await axios.delete(
-          `https://power-tools-server-nine.vercel.app/products/${item._id}`, {
+          `http://localhost:5000/products/${item._id}`, {
           headers: {
             authorization: `Bearer ${localStorage.getItem('token')}`
           }
@@ -41,7 +41,7 @@ const ManageProducts = () => {
   return (
     <div className="bg-[#F6F6F6]">
 
-      <div className="bg-[#FFF] w-[800px] min-h-screen ml-[130px] static top-0">
+      <div className="bg-[#FFF] w-[900px] min-h-screen ml-[130px] static top-0">
         <div className="font-cinzel pl-8 pt-12 font-bold text-3xl text-[#151515]">
           <h4>TOTAL MENU:{menu.length}</h4>
         </div>
@@ -55,12 +55,13 @@ const ManageProducts = () => {
                 <th>item image</th>
                 <th>item Name</th>
                 <th>price</th>
+                <th>quantity</th>
                 <th>edit</th>
                 <th>delete</th>
               </tr>
             </thead>
             <tbody>
-              {/* row 1 */}
+             
 
               {menu.map((item, index) => (
                 <tr className="text-center" key={item._id}>
@@ -70,6 +71,7 @@ const ManageProducts = () => {
                   </td>
                   <td>{item.name}</td>
                   <td>${item.price}</td>
+                  <td>{item.quantity}</td>
                   <td>
                     <Link to={`/dashboard/updateItem/${item._id}`}>
                       <button className="bg-[#D1A054] text-white text-xl px-3 py-1 rounded w-[40px] h-[40px]">

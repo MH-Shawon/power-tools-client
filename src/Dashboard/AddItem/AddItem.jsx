@@ -33,15 +33,16 @@ const AddItem = () => {
 
         description: data.description,
         price: parseFloat(data.price),
-        quantity: data.quantity,
+        quantity:parseInt(data.quantity),
         img: res.data.data.display_url,
       };
-      const menuRes = await axios.post("https://power-tools-server-nine.vercel.app/products", menuItem, {
+      const menuRes = await axios.post("http://localhost:5000/products", menuItem, {
         headers: {
           authorization: `Bearer ${localStorage.getItem('token')}`
         }
       }
       );
+      
       if (menuRes.data.insertedId) {
         reset();
         toast.success(`${data.name} added to the menu`)

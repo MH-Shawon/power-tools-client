@@ -18,7 +18,7 @@ const CheckOutForm = ({ payment }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch("https://power-tools-server-nine.vercel.app/create-payment-intent", {
+        fetch("http://localhost:5000/create-payment-intent", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ price }),
@@ -78,7 +78,7 @@ const CheckOutForm = ({ payment }) => {
                 last4: paymentMethod.card.last4,
                 transactionId: paymentIntent.id,
             };
-            const url = `https://power-tools-server-nine.vercel.app/payment/${_id}`;
+            const url = `http://localhost:5000/payment/${_id}`;
             fetch(url, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },

@@ -19,7 +19,7 @@ const SocialBtn = () => {
 
         };
 
-        axios.post('https://power-tools-server-nine.vercel.app/users', userInfo)
+        axios.post('http://localhost:5000/users', userInfo)
           .then(res => {
 
             if (res.data) {

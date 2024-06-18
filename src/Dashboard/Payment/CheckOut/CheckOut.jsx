@@ -18,7 +18,7 @@ const CheckOut = () => {
   } = useForm();
 
   useEffect(() => {
-    fetch(`https://power-tools-server-nine.vercel.app/product/${id}`)
+    fetch(`http://localhost:5000/product/${id}`)
       .then((res) => res.json())
       .then((data) => setProduct(data));
   }, [id]);
@@ -28,7 +28,7 @@ const CheckOut = () => {
     data.price = product.price;
     data.quantity = localStorage.getItem("quantity");
     data.status = "pending";
-    fetch("https://power-tools-server-nine.vercel.app/orders", {
+    fetch("http://localhost:5000/orders", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(data),

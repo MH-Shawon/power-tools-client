@@ -13,7 +13,7 @@ const MyBookings = () => {
   //   const { user } = useAuth();
 
   //   useEffect(() => {
-  //     fetch(`https://power-tools-server-nine.vercel.app/orders?email=${user.email}`)
+  //     fetch(`http://localhost:5000/orders?email=${user.email}`)
   //       .then((res) => res.json())
   //       .then((data) => setorders(data));
   //   }, [user.email]);
@@ -31,7 +31,7 @@ const MyBookings = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await axios.delete(
-          `https://power-tools-server-nine.vercel.app/delete-order/${order._id}`, {
+          `http://localhost:5000/delete-order/${order._id}`, {
           headers: {
             authorization: `Bearer ${localStorage.getItem('token')}`
           }

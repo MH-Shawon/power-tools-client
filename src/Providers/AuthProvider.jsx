@@ -49,7 +49,7 @@ const AuthProvider = ({ children }) => {
       if (currentUser) {
         const userInfo = { email: currentUser.email };
         try {
-          const res = await axios.post("https://power-tools-server-nine.vercel.app/jwt", userInfo);
+          const res = await axios.post("http://localhost:5000/jwt", userInfo);
           localStorage.setItem("token", res.data.token);
         } catch (error) {
           console.error("Error fetching auth token:", error);

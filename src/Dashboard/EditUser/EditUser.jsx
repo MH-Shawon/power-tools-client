@@ -14,7 +14,7 @@ const EditUser = () => {
         const userInfo = {
             name, email: user?.email, age, phone
         }
-        axios.put(`https://power-tools-server-nine.vercel.app/users/${user.email}`, userInfo)
+        axios.put(`http://localhost:5000/users/${user.email}`, userInfo)
             .then(res => {
                 if (res.data.modifiedCount > 0) {
                     toast.success(`${name}'s profile successfully updated`)
