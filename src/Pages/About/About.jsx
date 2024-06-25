@@ -4,7 +4,7 @@ import { FaAward, FaCubes, FaHandsHelping, FaShieldAlt, FaShippingFast, FaSmile,
 
 const About = () => {
     return (
-        <div  style={{ padding: '50px 50px', backgroundColor: '#f8f9fa' }}>
+        <div  style={{ padding: '50px 50px 50px 0px', backgroundColor: '#f8f9fa' }}>
             <Container>
                 <h2 style={{ marginBottom: '30px', fontSize: '2.5rem', fontWeight: 'bold', textAlign: 'center' }}>About Us</h2>
                 <Row>
