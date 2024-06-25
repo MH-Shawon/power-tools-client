@@ -43,5 +43,9 @@
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.3",
     "vite": "^5.2.0"
-  }
+  },
+  "description": "## Description This project is an e-commerce website tailored for managing power tools. It provides a platform for users to browse, purchase, and manage orders related to power tools.",
+  "main": "postcss.config.js",
+  "author": "",
+  "license": "ISC"
 }
