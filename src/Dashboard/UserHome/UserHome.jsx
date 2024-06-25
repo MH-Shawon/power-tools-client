@@ -6,10 +6,10 @@ import Loading from "../../Components/Loading";
 const UserHome = () => {
     const { user } = useAuth()
     const [userInfo, setUserInfo] = useState()
-    console.log(userInfo);
+
     useEffect(() => {
 
-        fetch(`http://localhost:5000/users/${user.email}`)
+        fetch(`https://power-tools-server-nine.vercel.app/users/${user.email}`)
             .then((res) => res.json())
             .then((data) => setUserInfo(data));
 

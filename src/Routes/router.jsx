@@ -38,7 +38,7 @@ const router = createBrowserRouter([
       {
         path: "/products",
         element: <AllProducts />,
-        loader: () => fetch("http://localhost:5000/products"),
+        loader: () => fetch("https://power-tools-server-nine.vercel.app/products"),
       },
       {
         path: "/productDetails/:id",
@@ -48,7 +48,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/products/${params.id}`),
+          fetch(`https://power-tools-server-nine.vercel.app/products/${params.id}`),
       },
       {
         path: "/checkOut/:id",
@@ -125,7 +125,7 @@ const router = createBrowserRouter([
           </AdminRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/products/${params.id}`),
+          fetch(`https://power-tools-server-nine.vercel.app/products/${params.id}`),
       },
       {
         path: "/dashboard/admin-home",
@@ -147,7 +147,7 @@ const router = createBrowserRouter([
         path: "/dashboard/edit-user/:id",
         element: <EditUser />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/user/${params.id}`),
+          fetch(`https://power-tools-server-nine.vercel.app/user/${params.id}`),
       },
       {
         path: "/dashboard/my-booking",

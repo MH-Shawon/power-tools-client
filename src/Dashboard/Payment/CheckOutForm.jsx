@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
+import axios from "axios";
 
 
 const CheckOutForm = ({ payment }) => {
@@ -18,7 +19,7 @@ const CheckOutForm = ({ payment }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://power-tools-server-nine.vercel.app/create-payment-intent", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ price }),
@@ -48,7 +49,6 @@ const CheckOutForm = ({ payment }) => {
             return;
         } else {
             setError("");
-            console.log(paymentMethod);
         }
         // payment intent
         const { paymentIntent, error: intentError } =
@@ -78,20 +78,15 @@ const CheckOutForm = ({ payment }) => {
                 last4: paymentMethod.card.last4,
                 transactionId: paymentIntent.id,
             };
-            const url = `http://localhost:5000/payment/${_id}`;
-            fetch(url, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(paymentInfo),
-            })
-                .then((res) => res.json())
-                .then((data) => {
-                    if (data.modifiedCount) {
-                        navigate("/order-success");
-                    } else {
-                        window.location.reload();
-                    }
-                });
+            const res = await axios.post(`https://power-tools-server-nine.vercel.app/payment/${_id}`, paymentInfo)
+            if (res.data) {
+                navigate("/order-success");
+            }
+            else {
+                window.location.reload();
+            }
+
+
         }
     };
 

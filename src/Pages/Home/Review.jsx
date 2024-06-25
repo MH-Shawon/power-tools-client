@@ -13,7 +13,7 @@ const Review = () => {
   const [ratings, setRatings] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/rating")
+    fetch("https://power-tools-server-nine.vercel.app/rating")
       .then((res) => res.json())
       .then((data) => setRatings(data));
   }, []);

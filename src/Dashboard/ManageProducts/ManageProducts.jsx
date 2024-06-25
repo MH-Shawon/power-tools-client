@@ -23,7 +23,7 @@ const ManageProducts = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await axios.delete(
-          `http://localhost:5000/products/${item._id}`, {
+          `https://power-tools-server-nine.vercel.app/products/${item._id}`, {
           headers: {
             authorization: `Bearer ${localStorage.getItem('token')}`
           }
@@ -61,7 +61,7 @@ const ManageProducts = () => {
               </tr>
             </thead>
             <tbody>
-             
+
 
               {menu.map((item, index) => (
                 <tr className="text-center" key={item._id}>

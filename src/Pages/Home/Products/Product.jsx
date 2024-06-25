@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const Product = ({ product }) => {
   
+  
   return (
     <div className=" products">
       <div className="img-info">

@@ -22,7 +22,7 @@ const ProductDetails = () => {
       return alert("Quantity must be 15 or bigger than 15");
     }
     data.quantity = product.quantity - data.quantity;
-    axios.put(`http://localhost:5000/product/${product._id}`, data).then((response) => {
+    axios.put(`https://power-tools-server-nine.vercel.app/product/${product._id}`, data).then((response) => {
       if (response.data.acknowledged) {
         navigate(`/checkOut/${product._id}`);
         reset();
