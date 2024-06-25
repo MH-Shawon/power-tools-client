@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
-import { FaAward, FaCubes, FaTag, FaHandsHelping, FaShippingFast, FaShieldAlt, FaSmile } from 'react-icons/fa';
+import { FaAward, FaCubes, FaHandsHelping, FaShieldAlt, FaShippingFast, FaSmile, FaTag } from 'react-icons/fa';
 
 const About = () => {
     return (
