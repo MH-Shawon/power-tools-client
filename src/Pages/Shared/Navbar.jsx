@@ -66,7 +66,7 @@ const Navbar = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Portfolio
+        Portfolio
         </a>
       </li>
       {user && !admin && (
