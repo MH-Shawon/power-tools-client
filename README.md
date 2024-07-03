@@ -1,7 +1,10 @@
-# Power Tools E-Commerce Site
+#  Power-Tools - Best tools selling service all over the world.
 
 ## Description
 This project is an e-commerce website tailored for managing power tools. It provides a platform for users to browse, purchase, and manage orders related to power tools.
+
+- [Live Site](https://power-tools-9e58f.firebaseapp.com/)
+- [Server Site](https://power-tools-server-nine.vercel.app/)
 
 ## Features
 - **Product Catalog:** Browse a wide range of power tools with detailed descriptions and images.
@@ -12,14 +15,18 @@ This project is an e-commerce website tailored for managing power tools. It prov
 
 ## How to Run Locally
 1. Clone the repository to your local machine: `git clone https://github.com/yourusername/power-tools-ecommerce.git`
-2. Navigate to the project directory: `cd power-tools-ecommerce`
+2. Navigate to the project directory: `cd power-tools-eCommerce`
 3. Install dependencies: `npm install` or `yarn install`
 4. Set up the database and configure environment variables as per the provided documentation.
 5. Start the development server: `npm start` or `yarn start`
 6. Access the application in your web browser at `http://localhost:3000`
 
 ## Technologies Used
-- Frontend: HTML, CSS, JavaScript, React.js
+- Frontend: HTML, CSS, JavaScript, React-js
 - Backend: Node.js, Express.js, MongoDB
-- Authentication: JSON Web Tokens (JWT)
-- UI Framework: Bootstrap
+- Authentication: Firebase, JSON Web Tokens (JWT)
+- UI Framework: Daisy UI
+
+## Admin Login System
+- Admin Email: powertools@gmail.com
+- Password: 123456
