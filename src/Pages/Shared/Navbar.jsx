@@ -83,7 +83,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="fixed z-10 px-12 font-extrabold navbar bg-[#F2BB29]">
+    <div className="fixed z-10 w-full px-4 py-2 font-extrabold bg-[#F2BB29] md:px-12 navbar">
       <div className="navbar-start">
         <div className="dropdown">
           <div role="button" tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -109,9 +109,9 @@ const Navbar = () => {
             {menuItems}
           </ul>
         </div>
-        <Link to={"/"} className="text-xl normal-case btn btn-ghost">
+        <Link to="/" className="text-xl normal-case btn btn-ghost">
           <img
-            style={{ width: 100 }}
+            className="w-24 md:w-32"
             src="https://i.ibb.co/HzpCshd/dewalt.png"
             alt="Logo"
           />
@@ -120,17 +120,17 @@ const Navbar = () => {
       <div className="hidden navbar-center lg:flex">
         <ul className="px-1 text-base menu menu-horizontal">{menuItems}</ul>
       </div>
-      <div className="relative navbar-end">
+      <div className="navbar-end">
         <div className="relative">
           <input
             type="text"
             value={searchTerm}
             onChange={handleSearch}
             placeholder="Search by model"
-            className="mr-16 input input-bordered input-sm"
+            className="input input-bordered input-sm"
           />
           {searchResults.length > 0 && (
-            <ul className="absolute left-0 mt-1 z-[1] p-2 shadow bg-base-100 rounded-box w-[210px]">
+            <ul className="absolute left-0 mt-1 z-[1] p-2 shadow bg-base-100 rounded-box w-full md:w-[210px]">
               {searchResults.map((product) => (
                 <li key={product.model}>
                   <Link
@@ -153,7 +153,7 @@ const Navbar = () => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img alt="Tailwind CSS Navbar component" src={user?.photoURL} />
+                <img alt="User Avatar" src={user?.photoURL} />
               </div>
             </div>
             {isOpen && (
@@ -180,6 +180,7 @@ const Navbar = () => {
         )}
       </div>
     </div>
+
   );
 };
 
