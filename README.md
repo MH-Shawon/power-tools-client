@@ -5,7 +5,7 @@ This project is an e-commerce website tailored for managing power tools. It prov
 
 - [Live Site](https://power-tools-9e58f.firebaseapp.com/)
 - [Server Site](https://power-tools-server-nine.vercel.app/)
--[GitHub Server](https://github.com/MH-Shawon/power-tools-server)
+- [GitHub Server](https://github.com/MH-Shawon/power-tools-server)
 
 ## Features
 - **Product Catalog:** Browse a wide range of power tools with detailed descriptions and images.
