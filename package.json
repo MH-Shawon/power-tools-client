@@ -15,7 +15,7 @@
     "aos": "^2.3.4",
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
-    "firebase": "^10.12.2",
+    "firebase": "^10.13.1",
     "glob": "^10.4.1",
     "localforage": "^1.10.0",
     "lru-cache": "^10.2.2",
