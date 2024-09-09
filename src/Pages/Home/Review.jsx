@@ -56,7 +56,7 @@ const Review = () => {
   };
   return (
     <div>
-      <div className="px-5 py-5 overflow-x-hidden md:container md:mx-auto lg:px-0 md:py-16">
+      <div className="px-5 py-5 overflow-x-hidden text-black md:container md:mx-auto lg:px-0 md:py-16">
         <div className="text-center section-title mb-14">
           <h2 className="text-3xl font-semibold capitalize">
             Our customer reviews

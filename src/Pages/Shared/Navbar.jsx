@@ -104,7 +104,7 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 "
           >
             {menuItems}
           </ul>
@@ -117,8 +117,8 @@ const Navbar = () => {
           />
         </Link>
       </div>
-      <div className="hidden navbar-center lg:flex">
-        <ul className="px-1 text-base menu menu-horizontal">{menuItems}</ul>
+      <div className="hidden  navbar-center lg:flex">
+        <ul className="px-1 text-base text-black menu menu-horizontal">{menuItems}</ul>
       </div>
       <div className="navbar-end">
         <div className="relative">
@@ -174,7 +174,7 @@ const Navbar = () => {
             )}
           </div>
         ) : (
-          <li className="btn btn-sm btn-outline">
+          <li className="ml-2 text-black btn btn-sm btn-outline">
             <Link to="/login">Login</Link>
           </li>
         )}

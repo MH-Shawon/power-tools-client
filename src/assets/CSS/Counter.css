@@ -10,9 +10,11 @@
 .counter h2{
     font-size: 20px;
     text-transform: uppercase;
+    color: black;
 }
 .counter span{
     display: block;
     font-size: 50px;
     font-weight: 600;
+    color: black;
 }

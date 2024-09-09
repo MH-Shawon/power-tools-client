@@ -7,9 +7,12 @@
     position: absolute;
     bottom: 15px;
     right: 15px;
+    color: white;
 }
 .products-info{
     margin: 10px 0;
+    color: #3a3838;
+    
 }
 .img-info img{
     margin-bottom: 40px;

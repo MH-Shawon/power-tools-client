@@ -10,7 +10,7 @@ import Service from "./Service";
 
 const Home = () => {
     return (
-        <div>
+        <div className="bg-white">
             <Banner />
             <Service />
             <Info />

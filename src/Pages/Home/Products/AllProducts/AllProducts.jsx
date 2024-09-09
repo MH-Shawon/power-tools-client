@@ -6,7 +6,7 @@ const AllProducts = () => {
 
     return (
         <div>
-            <div className="grid grid-cols-1 gap-10 px-20 pt-20 pb-6 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-10 px-20 pt-20 pb-6 bg-white lg:grid-cols-3">
                 {products.map((product) => (
                     <Product key={product.name} product={product}></Product>
                 ))}
