@@ -19,7 +19,7 @@ This project is an e-commerce website tailored for managing power tools. It prov
 2. Navigate to the project directory: `cd power-tools-eCommerce`
 3. Install dependencies: `npm install` or `yarn install`
 4. Set up the database and configure environment variables as per the provided documentation.
-5. Start the development server: `npm start` or `yarn start`
+5. Start the development server: `npm run dev` or `yarn dev`
 6. Access the application in your web browser at `http://localhost:3000`
 
 ## Technologies Used
